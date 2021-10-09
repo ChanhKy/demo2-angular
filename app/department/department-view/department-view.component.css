@@ -1,0 +1,9 @@
+.text-trai-phai{
+  text-align: justify;
+}
+.bo-margin{
+  margin: 0;
+}
+.col-7>.bo-margin{
+  padding-top: 8px;
+}

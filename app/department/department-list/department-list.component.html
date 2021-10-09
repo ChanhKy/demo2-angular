@@ -1,0 +1,98 @@
+<div class=" float-right  " style="width: 100%; background-color: #fff;">
+  <div class="border-bottom mt-3" style="height: 6vh">
+    <h5 href="#"> <strong> List Department </strong></h5>
+  </div>
+  <div class="d-flex justify-content-between ">
+    <div class=" d-flex justify-content-between  align-items-center ">
+      <div class="d-flex mt-3 form-group align-items-center">
+        <div class="col-auto">
+          <div class="input-group">
+            <input type="text" class="form-control " [(ngModel)]="searchDepartment" (keyup)="searchAll()"
+              placeholder="Enter name" style="width: 300px;">
+            <div class="icon-del-input border-left-0 input-group-prepend form-control align-items-center " (click)="removeInput()">
+              <i class="  fas fa-times "></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="example-button-row pl-2">
+        <button mat-raised-button (click)="searchAll()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between pb-1">
+    <div class="">
+      <button  mat-raised-button color="" (click)="deleteMutilple()">Delete multiple</button>
+    </div>
+    <div class="">
+      <a type="button" class=" btn btn-primary" mat-raised-button [routerLink]="['/department/create']">To add a
+        department</a>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">
+          <input type="checkbox" class="check-group" [(ngModel)]="selectedAll" (change)="selectAll()">
+        </th>
+        <th scope="col" style="width: 6%;">Stt  <i class="sort fas fa-sort " (click)="sortBy('departmentId')"></i></th>
+        <th scope="col" style="width: 20%;">Name  <i class="sort fas fa-sort " (click)="sortBy('departmentName')"></i></th>
+        <th scope="col" style="width: 50%;">Description</th>
+        <th scope="col" style="width: 20%;">Action </th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr *ngFor="let department of departments; index as i">
+        <td>
+          <input type="checkbox"
+          class="check-group"
+          value="{{department.departmentId}}"
+          [(ngModel)]="department.isSelected"
+          (change)="checkIfSelected()">
+        </td>
+        <td class="tr-td">{{i+1}}</td>
+        <td> <a [routerLink]="['/department/view', department.departmentId]">    {{department.departmentName}} </a> </td>
+        <td> <p class="ngatDoan">{{department.description}} </p> </td>
+        <td><a class="btn btn-primary mr-3"  mat-raised-button (click)="btnEdit(department.departmentId)" >
+            Edit
+          </a>
+
+          <!-- <a [routerLink]="['/product/delete', department.id]">Delete</a> -->
+          <button type="button" class="btn btn-danger"  mat-raised-button
+            (click)="changeId(department.departmentId)">
+            Delete
+          </button>
+          <!-- data-toggle="modal" data-target="#deleteModal" -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div   *ngIf="departments.length == 0 " class="alert alert-info text-danger">
+    Danh sach khong co du lieu
+  </div>
+  <div class="">
+    <app-pagination *ngIf="departments.length > 0" (action)="getDepartments($event)" [(totalPages)]="totalPages" [(totalElements)]="totalElements"></app-pagination>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you want to delete department
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

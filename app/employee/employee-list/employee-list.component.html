@@ -1,0 +1,108 @@
+<div class=" float-right  " style="width: 100%; background-color: #fff;">
+  <div class="border-bottom mt-3" style="height: 6vh">
+    <h5 href="#"> <strong> List Employee </strong></h5>
+  </div>
+
+  <div class="d-flex justify-content-between ">
+    <div class=" d-flex justify-content-between  align-items-center ">
+      <div class="d-flex mt-3 form-group align-items-center">
+        <div class="col-auto p-0">
+          <div class="input-group">
+            <input type="text" class="form-control " [(ngModel)]="searchEmployee" (keyup)="searchAll()"
+              placeholder="Enter: name, phone, address" style="width: 300px;" id="search" autofocus>
+            <div class="icon-del-input border-left-0 input-group-prepend form-control align-items-center " (click)="removeInput()">
+              <i class="  fas fa-times "></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="example-button-row pl-2">
+        <button (click)="searchAll()" mat-raised-button>Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between pb-1">
+    <div class="">
+      <button  mat-raised-button color="" (click)=" deleteMutilple()">Delete multiple</button>
+    </div>
+    <div class="">
+      <a type="button" class=" btn btn-primary" mat-raised-button [routerLink]="['/employee/create']">To add a
+        employee</a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">
+          <input type="checkbox" class=""  [(ngModel)]="selectedAll" (change)="selectAll()">
+        </th>
+        <th scope="col" style="width: 6%;" >Stt <i class="sort fas fa-sort " (click)="sortBy('employeeId')"></i> </th>
+        <th scope="col" style="width: 19%;">Name <i class=" sort fas fa-sort" (click)="sortBy('employeeName')"></i></th>
+        <th scope="col" style="width: 10%;">Gender <i class="sort fas fa-sort"(click)="sortBy('employeeGender')"></i></th>
+        <th scope="col" style="width: 12%;">Phone <i class="sort fas fa-sort" (click)="sortBy('employeePhone')"></i></th>
+        <th scope="col" style="width: 13%;">Position <i class="sort fas fa-sort" (click)="sortBy('employeePosition')"></i> </th>
+        <th scope="col" style="width: 15%;">Department  <i class="sort fas fa-sort" (click)="sortBy('department')"></i> </th>
+        <th scope="col" style="width: 20%;">Action </th>
+      </tr>
+    </thead>
+    <tbody id="tbody" *ngIf="employees.length > 0">
+      <tr *ngFor="let employee of employees; index as i">
+        <td>
+          <input type="checkbox"
+           class="check-group"
+           [(ngModel)]="employee.isSelected"
+           (change)="checkIfSelected()"
+           value="{{employee.employeeId}}"
+
+          >
+        </td>
+        <td>{{i+1}}</td>
+        <td>
+          <div id="tooltip">
+            <a  [routerLink]="['/employee/view', employee.employeeId]"> {{employee.employeeName}} </a>
+          </div>
+        </td>
+        <td>{{employee.employeeGender}}</td>
+        <td>{{employee.employeePhone}}</td>
+        <td>{{employee.employeePosition}}</td>
+        <td>{{employee.department.departmentName}}</td>
+        <td><a class="btn btn-primary mr-3" mat-raised-button (click)="btnEdit(employee.employeeId)">
+            Edit
+          </a>
+          <button type="button" class="btn btn-danger" id="btn-delete" mat-raised-button (click)="changeId(employee.employeeId)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="employees.length == 0 " class="alert alert-info text-danger">
+    No results were found
+  </div>
+
+  <div class="">
+    <app-pagination *ngIf="employees.length > 0" (action)="getEmployees($event)" [(totalPages)]="totalPages"
+      [(totalElements)]="totalElements"></app-pagination>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you want to delete employee
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

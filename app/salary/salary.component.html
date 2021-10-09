@@ -1,0 +1,82 @@
+<div class="container-fluid " style="padding: 0; height: 100%; background-color: cyan;">
+  <div class=" float-right" style="width: 83%; background-color: #fff; box-shadow: 0 10px 40px rgba(150, 174, 178, 1);">
+
+    <div class="mt-3 ml-3 mr-3 ">
+      <div>
+        <label class ="col-form-label">
+          <strong> Salary employee </strong>
+        </label>
+      </div>
+      <form focusInvalidInput [formGroup]="salaryForm"   (ngSubmit)="onSubmit()" novalidate >
+        <div class="row">
+
+          <div class=" col-8  form-group mb-2 row border-bottom ">
+            <label class="col-5 col-form-label">
+              <strong>Employee </strong>
+            </label>
+            <div class="col-7 mb-2">
+              <div formGroupName="employee">
+                <select class=" form-control" formControlName="employeeId">
+                  <option value="" [selected]=true hidden> --Choose employee-- </option>
+                  <option *ngFor="let employee of employees" [value]="employee.employeeId">{{employee.employeeName}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-8  form-group mb-2 row border-bottom">
+            <label class="col-5 col-form-label">
+              <strong>Total overtime (hours) </strong>
+            </label>
+            <div class="col-7 mb-2">
+              <input type="text" class="form-control" formControlName="timeTangCa" maxlength="10" [(ngModel)]="toTalTime" (keyup)="tinhluong()">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-8  form-group mb-2 row border-bottom ">
+            <label class="col-5 col-form-label">
+              <strong>Coefficient</strong>
+            </label>
+            <div class="col-7 mb-2">
+              <div formGroupName="heSoTangCa">
+                <select class=" form-control" formControlName="heSoId" (change)="tinhluong()">
+                  <option value="" [selected]=true hidden> --Choose He so-- </option>
+                  <option *ngFor="let heSo of heSoTangCas" [value]="heSo.heSoId">{{heSo.heSoId}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-8  form-group mb-2 row border-bottom ">
+            <label class="col-5 col-form-label">
+              <strong>Total overtime salary (vnd) </strong>
+            </label>
+            <div class="col-7 mb-2">
+              <input type="text" class="form-control" value="{{toTolOvertimeSalary  | currency : 'VND' }}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-8  form-group mb-2 row border-bottom ">
+            <label class="col-5 col-form-label">
+              <strong>Total salary (vnd)</strong>
+            </label>
+            <div class="col-7 mb-2">
+              <label class="text-danger"> Total salary = basic salary + overtime salary </label>
+              <input type="text" class="form-control" formControlName="sumSalary" ngModel="{{totalSalary | currency : 'VND'}} ">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn-close btn btn-secondary" (click)="resetForm()">Reset</button>
+          <button type="submit" class="btn-add btn btn-primary" id="btn-add" > Add employee</button>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class=" float-right  mt-3 ml-3 mr-3" style="width: 97%; background-color: #fff;">
+    <div class="row d-lex">
+      <div class="col-lg-6">
+        <div class=" col-12  ml-3 row border-bottom">
+          <label class="col-5 ">
+            <p>Tên nhân viên </p>
+          </label>
+          <div class="col-7">
+            <h3 class="text-break">{{employee.employeeName}}</h3>
+          </div>
+        </div>
+        <div class=" col-12  ml-3 row border-bottom">
+          <label class="col-5 ">
+            <p>Chức vụ </p>
+          </label>
+          <div class="col-7">
+            <p>{{employee.employeePosition}}</p>
+          </div>
+        </div>
+        <div class=" col-12   ml-3 row border-bottom">
+          <label class="col-5 col-form-label">
+            <p>Phòng ban </p>
+          </label>
+          <div class="col-7 ">
+            <p>{{employee.department.departmentName}}</p>
+          </div>
+        </div>
+        <div class=" col-12   ml-3 row border-bottom">
+          <label class="col-5 col-form-label">
+            <p>Mã nhân viên </p>
+          </label>
+          <div class="col-7">
+            <p>{{employee.employeeId}}</p>
+          </div>
+        </div>
+        <div class=" col-12   ml-3 row border-bottom">
+          <label class="col-5 col-form-label">
+            <p>Giới tính </p>
+          </label>
+          <div class="col-7">
+            <p>{{employee.employeeGender}}</p>
+          </div>
+        </div>
+        <div class=" col-12   ml-3 row border-bottom">
+          <label class="col-5 col-form-label">
+            <p> Ngày sinh </p>
+          </label>
+          <div class="col-7">
+            <p>{{employee.dayOfBirth |date : "dd-MM-yyyy"}}</p>
+          </div>
+        </div>
+        <div class=" col-12  ml-3 row border-bottom">
+          <label class="col-5 col-form-label">
+            <p> Điện thoại </p>
+          </label>
+          <div class="col-7">
+            <p>{{employee.employeePhone}}</p>
+          </div>
+        </div>
+        <div class=" col-12  ml-3 row border-bottom">
+          <label class="col-5">
+            <p> Địa chỉ </p>
+          </label>
+          <div class="col-7" >
+            <p class="text-break">{{employee.employeeAddress}}</p>
+          </div>
+        </div>
+        <div class=" col-12  ml-3 row border-bottom">
+          <label class="col-5">
+            <p> Skill </p>
+          </label>
+          <div class="col-7">
+            <p *ngFor="let skill of employee.skills"><strong>  •  </strong> {{skill.skillName}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-flex justify-content-center">
+        <div class="" >
+          <img class="rounded img-thumbnail" src="{{ employee.employeeImg }}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3 d-flex justify-content-end">
+        <a type="button" class="btn-close btn btn-secondary mr-2" mat-raised-button
+          [routerLink]="['/employee/list']">Back</a>
+      </div>
+    </div>
+</div>

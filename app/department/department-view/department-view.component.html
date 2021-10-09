@@ -1,0 +1,59 @@
+<div class=" float-right  mt-3 ml-3 mr-3" style="width: 97%; background-color: #fff;">
+  <div class="row d-lex">
+    <div class="col-lg-6">
+      <div class=" col-12  row border-bottom">
+        <label class="col-5 col-form-label">
+          <p>Department:  </p>
+        </label>
+        <div class="col-7 mb-2">
+          <h3 class="text-break">{{department.departmentName}}</h3>
+        </div>
+      </div>
+      <div class=" col-12  row border-bottom">
+        <label class="col-5 col-form-label">
+          <p class="bo-margin"> Department ID:  </p>
+        </label>
+        <div class="col-7 mb-2">
+          <p class="bo-margin"> {{department.departmentId}}</p>
+        </div>
+      </div>
+      <div class=" col-12  row border-bottom">
+        <label class="col-5 col-form-label">
+          <p class="bo-margin">Description </p>
+        </label>
+        <div class="col-7" >
+          <p class="text-break text-trai-phai bo-margin">{{department.description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf="employees.length > 0">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Stt</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Day of birth </th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody id="tbody" *ngIf="employees.length > 0">
+          <tr *ngFor="let employee of employees; index as i">
+            <td>{{i+1}}</td>
+            <td> <a [routerLink]="['/employee/view', employee.employeeId]"> {{employee.employeeName}} </a></td>
+            <td>{{employee.employeeGender}}</td>
+            <td>{{employee.dayOfBirth | date : "dd-MM-yyyy"}}</td>
+            <td>{{employee.employeePhone}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-12 mb-3 d-flex justify-content-end">
+      <a type="button" class="btn-close btn btn-secondary mr-2" mat-raised-button
+        [routerLink]="['/department/list']">Back</a>
+    </div>
+  </div>
+</div>

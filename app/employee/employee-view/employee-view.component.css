@@ -1,0 +1,15 @@
+.img-account {
+  width: 50%;
+  height: 50%;
+}
+img {
+  width: 200px;
+  height: 250px;
+}
+p {
+  margin: 0;
+  padding-top: 4px;
+}
+.col-7>p {
+  padding-top: 8px;
+}
